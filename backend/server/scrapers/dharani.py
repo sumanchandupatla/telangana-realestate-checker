@@ -8,7 +8,7 @@ Supports search by survey number, pattadar passbook number.
 import httpx
 from bs4 import BeautifulSoup
 
-from app.models.schemas import DharaniSearchRequest, DharaniSearchResponse, LandRecord
+from server.models.schemas import DharaniSearchRequest, DharaniSearchResponse, LandRecord
 
 DHARANI_URL = "https://dharani.telangana.gov.in"
 BHUBHARATI_URL = "https://bhubharati.telangana.gov.in"

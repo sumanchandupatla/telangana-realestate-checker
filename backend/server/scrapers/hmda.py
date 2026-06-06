@@ -8,7 +8,7 @@ Note: Most HMDA permissions are now processed through BuildNow/TG-bPASS.
 import httpx
 from bs4 import BeautifulSoup
 
-from app.models.schemas import HMDAPermission, HMDASearchRequest, HMDASearchResponse
+from server.models.schemas import HMDAPermission, HMDASearchRequest, HMDASearchResponse
 
 DPMS_URL = "https://dpms.hmda.gov.in/BPAMSClient/"
 

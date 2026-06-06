@@ -49,11 +49,15 @@ This tool aggregates data from multiple government sources:
 cd backend
 python -m venv .venv
 source .venv/bin/activate
-pip install -e .
-uvicorn app.main:app --reload --port 8000
+pip install -r requirements.txt
+uvicorn server.main:app --reload --port 8000
 ```
 
-### Frontend Setup
+The backend serves both the API and the pre-built frontend from `backend/static/`.
+
+### Frontend Development (optional)
+
+Only needed if you want to modify the frontend:
 
 ```bash
 cd frontend
@@ -61,14 +65,47 @@ npm install
 npm run dev
 ```
 
-The frontend will be at http://localhost:3000 and connects to the backend at http://localhost:8000.
+Then build the static export for the backend to serve:
 
-### Environment Variables
-
-Create a `.env.local` in `frontend/`:
-
+```bash
+npm run build
+cp -r out/ ../backend/static/
 ```
-NEXT_PUBLIC_API_URL=http://localhost:8000
+
+## Deployment
+
+The backend serves the full application (API + frontend). Deploy `backend/` to any Python hosting platform.
+
+### Render
+
+1. Connect your GitHub repo at [render.com](https://render.com)
+2. Create a **Web Service** with root directory set to `backend`
+3. Build command: `pip install -r requirements.txt`
+4. Start command: `uvicorn server.main:app --host 0.0.0.0 --port $PORT`
+
+Or use the included `render.yaml` for automatic configuration via [Render Blueprints](https://render.com/docs/blueprint-spec).
+
+### Railway
+
+1. Connect your repo at [railway.app](https://railway.app)
+2. Set root directory to `backend`
+3. Railway auto-detects the `Procfile` and deploys
+
+### Docker
+
+```bash
+cd backend
+docker build -t tg-realestate-checker .
+docker run -p 8000:8000 tg-realestate-checker
+```
+
+### Local (development)
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn server.main:app --reload --port 8000
+# Open http://localhost:8000
 ```
 
 ## API Endpoints
