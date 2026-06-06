@@ -7,10 +7,14 @@ Aggregates data from multiple government portals:
 - HMDA DPMS: Layout/building permissions in HMDA area
 """
 
+import os
 from datetime import datetime, timezone
+from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.models.schemas import (
     BuildingPermissionSearchRequest,
@@ -39,7 +43,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -47,6 +51,10 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
+    # If static frontend exists, serve it
+    static_index = Path(__file__).parent.parent / "static" / "index.html"
+    if static_index.is_file():
+        return FileResponse(static_index)
     return {
         "name": "Telangana Real Estate Permission Checker API",
         "version": "0.1.0",
@@ -183,3 +191,34 @@ async def unified_search(request: UnifiedSearchRequest):
         results=results,
         errors=errors,
     )
+
+
+# Serve static frontend files (must be after API routes)
+STATIC_DIR = Path(__file__).parent.parent / "static"
+
+if STATIC_DIR.exists():
+
+    @app.get("/{path:path}")
+    async def serve_frontend(request: Request, path: str):
+        """Serve the Next.js static export."""
+        # Try exact file first
+        file_path = STATIC_DIR / path
+        if file_path.is_file():
+            return FileResponse(file_path)
+
+        # Try path/index.html (trailing slash routes)
+        index_path = STATIC_DIR / path / "index.html"
+        if index_path.is_file():
+            return FileResponse(index_path)
+
+        # Try path.html
+        html_path = STATIC_DIR / (path + ".html")
+        if html_path.is_file():
+            return FileResponse(html_path)
+
+        # Fallback to root index.html
+        root_index = STATIC_DIR / "index.html"
+        if root_index.is_file():
+            return FileResponse(root_index)
+
+        return HTMLResponse("Not found", status_code=404)

@@ -1,4 +1,9 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+// API base URL: uses env var if set, otherwise empty string for same-origin requests
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+
+function getHeaders(): Record<string, string> {
+  return { "Content-Type": "application/json" };
+}
 
 export interface RERAProject {
   sr_no: number;
@@ -94,7 +99,7 @@ export async function searchRERA(params: {
 }): Promise<RERASearchResponse> {
   const res = await fetch(`${API_BASE}/api/rera/search`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(),
     body: JSON.stringify(params),
   });
   return res.json();
@@ -109,7 +114,7 @@ export async function searchDharani(params: {
 }): Promise<DharaniSearchResponse> {
   const res = await fetch(`${API_BASE}/api/dharani/search`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(),
     body: JSON.stringify(params),
   });
   return res.json();
@@ -122,7 +127,7 @@ export async function searchBPass(params: {
 }): Promise<BuildingPermissionSearchResponse> {
   const res = await fetch(`${API_BASE}/api/bpass/search`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(),
     body: JSON.stringify(params),
   });
   return res.json();
@@ -135,7 +140,7 @@ export async function searchHMDA(params: {
 }): Promise<HMDASearchResponse> {
   const res = await fetch(`${API_BASE}/api/hmda/search`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(),
     body: JSON.stringify(params),
   });
   return res.json();
@@ -147,7 +152,7 @@ export async function unifiedSearch(params: {
 }): Promise<UnifiedSearchResponse> {
   const res = await fetch(`${API_BASE}/api/unified/search`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(),
     body: JSON.stringify(params),
   });
   return res.json();
