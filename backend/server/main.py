@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.models.schemas import (
+from server.models.schemas import (
     BuildingPermissionSearchRequest,
     BuildingPermissionSearchResponse,
     DharaniSearchRequest,
@@ -29,7 +29,7 @@ from app.models.schemas import (
     UnifiedSearchRequest,
     UnifiedSearchResponse,
 )
-from app.scrapers import bpass, dharani, hmda, rera
+from server.scrapers import bpass, dharani, hmda, rera
 
 app = FastAPI(
     title="Telangana Real Estate Permission Checker",

@@ -8,7 +8,7 @@ Covers building permissions for GHMC, HMDA, DTCP areas.
 import httpx
 from bs4 import BeautifulSoup
 
-from app.models.schemas import (
+from server.models.schemas import (
     BuildingPermission,
     BuildingPermissionSearchRequest,
     BuildingPermissionSearchResponse,

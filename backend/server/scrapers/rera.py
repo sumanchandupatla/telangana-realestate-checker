@@ -7,7 +7,7 @@ Supports search by certificate number, project name, or promoter name.
 import httpx
 from bs4 import BeautifulSoup
 
-from app.models.schemas import RERAProject, RERASearchRequest, RERASearchResponse
+from server.models.schemas import RERAProject, RERASearchRequest, RERASearchResponse
 
 BASE_URL = "https://rerait.telangana.gov.in"
 SEARCH_URL = f"{BASE_URL}/SearchList/Search"
