@@ -39,32 +39,27 @@ export default function RERAPage() {
   const canSubmit = certificateNo || projectName || promoterName;
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] float" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/8 rounded-full blur-[120px] float" style={{ animationDelay: "3s" }} />
-      </div>
-
+    <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
       <motion.header
-        className="relative z-10 py-6 px-6"
-        initial={{ opacity: 0, y: -20 }}
+        className="py-4 px-6 border-b border-gray-100"
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="flex items-center gap-4 max-w-3xl mx-auto">
-          <Link href="/" className="text-indigo-400 hover:text-indigo-300 transition-colors text-sm flex items-center gap-1">
+          <Link href="/" className="text-[#7b2eff] hover:text-[#5a1ecc] transition-colors text-sm flex items-center gap-1 font-medium">
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path d="m15 18-6-6 6-6" />
             </svg>
             Back
           </Link>
-          <h1 className="text-xl font-bold text-white">TS-RERA Project Search</h1>
+          <div className="h-5 w-px bg-gray-200" />
+          <h1 className="text-lg font-bold text-gray-900">TS-RERA Project Search</h1>
         </div>
       </motion.header>
 
       {/* Main */}
-      <main className="relative z-10 flex-1 px-6 pb-16">
+      <main className="flex-1 px-6 py-8">
         <motion.div
           className="max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -72,51 +67,51 @@ export default function RERAPage() {
           transition={{ delay: 0.1 }}
         >
           {/* Search Form Card */}
-          <div className="glass-strong rounded-2xl p-8">
+          <div className="card p-8">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-white mb-2">Search Registered Projects</h2>
-              <p className="text-gray-400 text-sm">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Search Registered Projects</h2>
+              <p className="text-gray-500 text-sm">
                 Search the Telangana Real Estate Regulatory Authority database for registered projects.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="text-sm font-medium text-gray-300 mb-2 block">RERA Certificate Number</label>
+                <label className="text-sm font-medium text-gray-700 mb-2 block">RERA Certificate Number</label>
                 <input
                   type="text"
                   value={certificateNo}
                   onChange={(e) => setCertificateNo(e.target.value)}
                   placeholder="e.g., P02400002687"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none bg-white"
                 />
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="flex-1 h-px bg-white/10" />
-                <span className="text-xs text-gray-500 uppercase tracking-wider">or</span>
-                <div className="flex-1 h-px bg-white/10" />
+                <div className="flex-1 h-px bg-gray-200" />
+                <span className="text-xs text-gray-400 uppercase tracking-wider">or</span>
+                <div className="flex-1 h-px bg-gray-200" />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">Project Name</label>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Project Name</label>
                   <input
                     type="text"
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
                     placeholder="e.g., Prestige City"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none bg-white"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">Promoter Name</label>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Promoter Name</label>
                   <input
                     type="text"
                     value={promoterName}
                     onChange={(e) => setPromoterName(e.target.value)}
                     placeholder="e.g., My Home Constructions"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none bg-white"
                   />
                 </div>
               </div>
@@ -124,7 +119,7 @@ export default function RERAPage() {
               <motion.button
                 type="submit"
                 disabled={isLoading || !canSubmit}
-                className="w-full btn-primary py-4 text-white font-semibold rounded-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full btn-primary py-4 font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
               >
@@ -144,8 +139,8 @@ export default function RERAPage() {
             </form>
 
             <div className="mt-4 text-center">
-              <span className="text-xs text-gray-500">Source: </span>
-              <a href="https://rerait.telangana.gov.in/SearchList/Search" target="_blank" className="text-xs text-indigo-400 hover:text-indigo-300">
+              <span className="text-xs text-gray-400">Source: </span>
+              <a href="https://rerait.telangana.gov.in/SearchList/Search" target="_blank" className="text-xs text-[#7b2eff] hover:underline">
                 rerait.telangana.gov.in
               </a>
             </div>
@@ -155,12 +150,12 @@ export default function RERAPage() {
           <AnimatePresence mode="wait">
             {error && (
               <motion.div
-                className="mt-6 glass rounded-xl p-4 border border-red-500/20"
+                className="mt-6 rounded-xl p-4 bg-red-50 border border-red-200"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
-                <p className="text-red-400 text-sm">{error}</p>
+                <p className="text-red-600 text-sm">{error}</p>
               </motion.div>
             )}
 
@@ -170,38 +165,38 @@ export default function RERAPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <p className="text-sm text-gray-400">
-                  Found <span className="text-indigo-400 font-semibold">{results.length}</span> project(s)
+                <p className="text-sm text-gray-500">
+                  Found <span className="text-[#7b2eff] font-semibold">{results.length}</span> project(s)
                 </p>
                 {results.map((project, i) => (
                   <motion.div
                     key={i}
-                    className="glass rounded-xl p-6 card-hover"
+                    className="card p-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                   >
                     <div className="flex items-start justify-between mb-4">
-                      <h3 className="font-semibold text-white text-lg">{project.project_name}</h3>
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/20 text-green-400 border border-green-500/30">
+                      <h3 className="font-semibold text-gray-900 text-lg">{project.project_name}</h3>
+                      <span className="badge-green px-3 py-1 rounded-full text-xs font-semibold">
                         {project.status}
                       </span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <span className="text-gray-500 text-xs uppercase tracking-wider">Promoter</span>
-                        <p className="text-white font-medium mt-0.5">{project.promoter_name}</p>
+                        <span className="text-gray-400 text-xs uppercase tracking-wider">Promoter</span>
+                        <p className="text-gray-900 font-medium mt-0.5">{project.promoter_name}</p>
                       </div>
                       {project.last_modified_date && (
                         <div>
-                          <span className="text-gray-500 text-xs uppercase tracking-wider">Last Modified</span>
-                          <p className="text-white font-medium mt-0.5">{project.last_modified_date}</p>
+                          <span className="text-gray-400 text-xs uppercase tracking-wider">Last Modified</span>
+                          <p className="text-gray-900 font-medium mt-0.5">{project.last_modified_date}</p>
                         </div>
                       )}
                       {project.certificate_no && (
                         <div>
-                          <span className="text-gray-500 text-xs uppercase tracking-wider">Certificate No</span>
-                          <p className="text-white font-medium mt-0.5">{project.certificate_no}</p>
+                          <span className="text-gray-400 text-xs uppercase tracking-wider">Certificate No</span>
+                          <p className="text-gray-900 font-medium mt-0.5">{project.certificate_no}</p>
                         </div>
                       )}
                     </div>
@@ -212,11 +207,11 @@ export default function RERAPage() {
 
             {searched && !isLoading && results.length === 0 && !error && (
               <motion.div
-                className="mt-6 text-center py-8 glass rounded-xl"
+                className="mt-6 text-center py-8 card-flat rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <p className="text-gray-400">No projects found matching your search criteria.</p>
+                <p className="text-gray-500">No projects found matching your search criteria.</p>
               </motion.div>
             )}
           </AnimatePresence>

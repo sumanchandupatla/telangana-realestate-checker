@@ -40,32 +40,27 @@ export default function DharaniPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 right-0 w-80 h-80 bg-green-500/10 rounded-full blur-[100px] float" />
-        <div className="absolute bottom-0 -left-40 w-96 h-96 bg-emerald-500/8 rounded-full blur-[120px] float" style={{ animationDelay: "3s" }} />
-      </div>
-
+    <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
       <motion.header
-        className="relative z-10 py-6 px-6"
-        initial={{ opacity: 0, y: -20 }}
+        className="py-4 px-6 border-b border-gray-100"
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="flex items-center gap-4 max-w-3xl mx-auto">
-          <Link href="/" className="text-indigo-400 hover:text-indigo-300 transition-colors text-sm flex items-center gap-1">
+          <Link href="/" className="text-[#7b2eff] hover:text-[#5a1ecc] transition-colors text-sm flex items-center gap-1 font-medium">
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path d="m15 18-6-6 6-6" />
             </svg>
             Back
           </Link>
-          <h1 className="text-xl font-bold text-white">Dharani / Bhu Bharati - Land Records</h1>
+          <div className="h-5 w-px bg-gray-200" />
+          <h1 className="text-lg font-bold text-gray-900">Dharani / Bhu Bharati - Land Records</h1>
         </div>
       </motion.header>
 
       {/* Main */}
-      <main className="relative z-10 flex-1 px-6 pb-16">
+      <main className="flex-1 px-6 py-8">
         <motion.div
           className="max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -73,50 +68,50 @@ export default function DharaniPage() {
           transition={{ delay: 0.1 }}
         >
           {/* Form Card */}
-          <div className="glass-strong rounded-2xl p-8">
+          <div className="card p-8">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-white mb-2">Search Land Records</h2>
-              <p className="text-gray-400 text-sm">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Search Land Records</h2>
+              <p className="text-gray-500 text-sm">
                 Search the Dharani / Bhu Bharati portal for land ownership details, survey numbers, and pattadar information.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="text-sm font-medium text-gray-300 mb-2 block">
-                  District <span className="text-red-400">*</span>
+                <label className="text-sm font-medium text-gray-700 mb-2 block">
+                  District <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-indigo-500/50 appearance-none"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 focus:outline-none bg-white appearance-none"
                 >
-                  <option value="" className="bg-gray-900">Select District</option>
+                  <option value="">Select District</option>
                   {DISTRICTS.map((d) => (
-                    <option key={d} value={d} className="bg-gray-900">{d}</option>
+                    <option key={d} value={d}>{d}</option>
                   ))}
                 </select>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">Survey Number</label>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Survey Number</label>
                   <input
                     type="text"
                     value={surveyNo}
                     onChange={(e) => setSurveyNo(e.target.value)}
                     placeholder="e.g., 123/A"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none bg-white"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">Pattadar Passbook Number</label>
+                  <label className="text-sm font-medium text-gray-700 mb-2 block">Pattadar Passbook Number</label>
                   <input
                     type="text"
                     value={passbook}
                     onChange={(e) => setPassbook(e.target.value)}
                     placeholder="e.g., 0012345678"
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none bg-white"
                   />
                 </div>
               </div>
@@ -124,7 +119,7 @@ export default function DharaniPage() {
               <motion.button
                 type="submit"
                 disabled={isLoading || !district}
-                className="w-full btn-primary py-4 text-white font-semibold rounded-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full btn-primary py-4 font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
               >
@@ -143,13 +138,13 @@ export default function DharaniPage() {
               </motion.button>
             </form>
 
-            <div className="mt-4 text-center text-xs text-gray-500">
+            <div className="mt-4 text-center text-xs text-gray-400">
               Source:{" "}
-              <a href="https://dharani.telangana.gov.in/knowLandStatus" target="_blank" className="text-indigo-400 hover:text-indigo-300">
+              <a href="https://dharani.telangana.gov.in/knowLandStatus" target="_blank" className="text-[#7b2eff] hover:underline">
                 dharani.telangana.gov.in
               </a>
               {" / "}
-              <a href="https://bhubharati.telangana.gov.in/knowLandStatus" target="_blank" className="text-indigo-400 hover:text-indigo-300">
+              <a href="https://bhubharati.telangana.gov.in/knowLandStatus" target="_blank" className="text-[#7b2eff] hover:underline">
                 bhubharati.telangana.gov.in
               </a>
             </div>
@@ -159,12 +154,12 @@ export default function DharaniPage() {
           <AnimatePresence mode="wait">
             {response?.error && (
               <motion.div
-                className="mt-6 glass rounded-xl p-4 border border-amber-500/20"
+                className="mt-6 rounded-xl p-4 bg-amber-50 border border-amber-200"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
-                <p className="text-amber-400 text-sm">{response.error}</p>
+                <p className="text-amber-700 text-sm">{response.error}</p>
               </motion.div>
             )}
 
@@ -174,13 +169,13 @@ export default function DharaniPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <p className="text-sm text-gray-400">
-                  Found <span className="text-green-400 font-semibold">{response.records.length}</span> record(s)
+                <p className="text-sm text-gray-500">
+                  Found <span className="text-[#059669] font-semibold">{response.records.length}</span> record(s)
                 </p>
                 {response.records.map((record, i) => (
                   <motion.div
                     key={i}
-                    className="glass rounded-xl p-6 card-hover"
+                    className="card p-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
@@ -191,8 +186,8 @@ export default function DharaniPage() {
                         const label = key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
                         return (
                           <div key={key}>
-                            <span className="text-gray-500 text-xs uppercase tracking-wider">{label}</span>
-                            <p className="text-white font-medium text-sm mt-0.5">{String(value)}</p>
+                            <span className="text-gray-400 text-xs uppercase tracking-wider">{label}</span>
+                            <p className="text-gray-900 font-medium text-sm mt-0.5">{String(value)}</p>
                           </div>
                         );
                       })}
@@ -204,11 +199,11 @@ export default function DharaniPage() {
 
             {searched && !isLoading && response && response.records.length === 0 && !response.error && (
               <motion.div
-                className="mt-6 text-center py-8 glass rounded-xl"
+                className="mt-6 text-center py-8 card-flat rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <p className="text-gray-400">No land records found for the given criteria.</p>
+                <p className="text-gray-500">No land records found for the given criteria.</p>
               </motion.div>
             )}
           </AnimatePresence>
